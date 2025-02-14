@@ -26,7 +26,7 @@ Open Unreal Project
 
 Close Unreal Project
 
-Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Folder. (EX:C:\Users\{user{}\Documents\Unreal Projects\BowlingProject\Plugins) 
+Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Folder. (EX:C:\Users\\{user{}\Documents\Unreal Projects\BowlingProject\Plugins) 
 
 You might have to create the project "Plugins" folder
 
