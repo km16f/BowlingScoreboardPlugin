@@ -18,21 +18,13 @@ Includes C++ code needed to properly implement the scoring features
 
 Engine Version: 5.5.3
 
-Clone Repository to a safe locaiton
+Clone Repository to a safe location. Wherever you like Unreal Project files to live
 
-Create new blank project in Unreal 5.5
+Open BowlingProject.uproject with Unreal Engine. Make sure to use version 5.5
 
-Open Unreal Project
+If prompted to rebuild modules select yes.
 
-Close Unreal Project
-
-Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Folder. 
-
-(EX:C:\Users\\{user}\Documents\Unreal Projects\BowlingProject\Plugins) 
-
-You might have to create the project "Plugins" folder
-
-Open Unreal Project
+Once unreal loads make sure to compile project again.
 
 
 **TO RUN SCOREBOARD:**
@@ -55,3 +47,4 @@ inputs are valid.
 - IN PROGRESS:
   - Cursor does not automatically move to next box (Unreal UI is being wonky here)
   - If you click out of the socreboard into the level you can press SHIFT + F1 to get back to the board
+  - Final block sometimes doesn't add to total score
