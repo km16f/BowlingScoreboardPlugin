@@ -4,12 +4,17 @@ Bowling Scoreboard Exercise in Unreal Engine 5
 Description:
 
 This is a C++ plugin for Unreal Engine 5 aimed at simulating a bowling scoreboard.
+
 Contains a custom Widget Blueprint for the GUI elements of the scoreboard
+
 Includes C++ code needed to properly implement the scoring features
+
 
 ---------------------------------------------------------------------------------------------------
 
-INSTALL INFO:
+
+**INSTALL INFO:**
+
 
 Engine Version: 5.5
 
@@ -23,7 +28,9 @@ Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Fol
 
 Open Unreal Project
 
-TO RUN SCOREBOARD:
+
+**TO RUN SCOREBOARD:**
+
 
 Click "Window" Toolbar Menu in Unreal
 
@@ -36,7 +43,9 @@ From here you enter any number 0-9, "X", "x", or "/" in each box and hit enter
 The board will unlock the next boxes and calculate the running score if your 
 inputs are valid.
 
-KNOWN BUGS:
+
+**KNOWN BUGS:**
+
 - IN PROGRESS:
   - Cursor does not automatically move to next box (Unreal UI is being wonky here)
   - If you click out of the socreboard into the level you can press SHIFT + F1 to get back to the board
