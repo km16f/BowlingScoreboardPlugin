@@ -50,8 +50,6 @@ void FBowlingScoreBoardModule::ShutdownModule()
 
 void FBowlingScoreBoardModule::PluginButtonClicked()
 {
-	//Function run after plugin button is clicked from Window Toolbar menu
-	//This function spawns the necessary actor for our widget blueprint and start the game
 	SetupActor();
 	PlayScene();
 
@@ -59,7 +57,6 @@ void FBowlingScoreBoardModule::PluginButtonClicked()
 
 void FBowlingScoreBoardModule::PlayScene() 
 {
-	//Function to play the scene so the interactive widget will popup
 	if (GEditor)
 	{
 		FRequestPlaySessionParams params = FRequestPlaySessionParams();
@@ -69,9 +66,6 @@ void FBowlingScoreBoardModule::PlayScene()
 
 void FBowlingScoreBoardModule::SetupActor()
 {
-	//Function to load and spawn custom actor of class AScoreBoardActor 
-	// This actor has a special UPROPERTY we can attach our WidgetBlueprint to, to spawn the Widget
-
 	AScoreBoardActor* newActor;
 
 	FTransform tempTransform;
@@ -82,23 +76,23 @@ void FBowlingScoreBoardModule::SetupActor()
 	UClass* ScriptActorClass;
 	UClass* ScoreBoardWidgetClass;
 
-	ScriptActorClass = LoadClass<AScoreBoardActor>(nullptr, TEXT("/Script/CoreUObject.Class'/Script/BowlingScoreBoard.ScoreBoardActor'"));  // Loads the class of our custom C++ actor
+	ScriptActorClass = LoadClass<AScoreBoardActor>(nullptr, TEXT("/Script/CoreUObject.Class'/Script/BowlingScoreBoard.ScoreBoardActor'"));
 
 	if (ScriptActorClass)
 	{
-		worldContext = GEngine->GetWorldContextFromGameViewport(GEngine->GameViewport);								//Most reliable way of getting the world from the default unreal viewport
+		worldContext = GEngine->GetWorldContextFromGameViewport(GEngine->GameViewport);
 
-		currentWorld = worldContext->World();																		// Gets us the UWorld we need to spawn actors
+		currentWorld = worldContext->World();
 		if (currentWorld)
 		{
-			newActor = currentWorld->SpawnActor<AScoreBoardActor>(ScriptActorClass, tempTransform, tempParameters);						// Spawns the actor of our custom AScoreBoardActor class
+			newActor = currentWorld->SpawnActor<AScoreBoardActor>(ScriptActorClass, tempTransform, tempParameters);
 
-			ScoreBoardWidgetClass = LoadClass<UUserWidget>(nullptr, TEXT("/Script/UMGEditor.WidgetBlueprint'/BowlingScoreBoard/BP_ScoreBoardWidget.BP_ScoreBoardWidget_C'"));				//Loads our custom UWidgetBlueprint class
+			ScoreBoardWidgetClass = LoadClass<UUserWidget>(nullptr, TEXT("/Script/UMGEditor.WidgetBlueprint'/BowlingScoreBoard/BP_ScoreBoardWidget.BP_ScoreBoardWidget_C'"));
 
 			if (ScoreBoardWidgetClass)
 			{
-				UUserWidget* test = CreateWidget<UUserWidget>(currentWorld, ScoreBoardWidgetClass);											//Creates a widget instance of our blueprint class we need to set the UPROPERTY in our actor
-				newActor->ScoreBoardWidgetRef = test;																						//Sets the UPROPERTY for our actor so our widget can spawn in the scene when we play
+				UUserWidget* test = CreateWidget<UUserWidget>(currentWorld, ScoreBoardWidgetClass);
+				newActor->ScoreBoardWidgetRef = test;
 			}
 			else
 			{

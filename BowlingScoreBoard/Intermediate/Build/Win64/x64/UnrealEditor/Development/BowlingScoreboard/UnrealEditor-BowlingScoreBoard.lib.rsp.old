@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-BowlingScoreBoard.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Intermediate\Build\Win64\x64\BowlingProjectEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\Module.BowlingScoreBoard.cpp.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\BowlingScoreBoard.cpp.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\BowlingScoreBoardCommands.cpp.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\BowlingScoreBoardStyle.cpp.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\ScoreBoardActor.cpp.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\ScoreBoardWidget.cpp.obj"
+"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\Default.rc2.res"
+/OUT:"C:\Users\kylem\Documents\Unreal Projects\BowlingProject\Plugins\BowlingScoreBoard\Intermediate\Build\Win64\x64\UnrealEditor\Development\BowlingScoreBoard\UnrealEditor-BowlingScoreBoard.lib"

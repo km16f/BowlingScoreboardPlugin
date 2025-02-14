@@ -1,0 +1,16 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.BowlingScoreBoard.cpp.obj": [
+			"BowlingScoreBoard.init.gen.cpp.obj",
+			"ScoreBoardActor.gen.cpp.obj",
+			"ScoreBoardWidget.gen.cpp.obj",
+			"PerModuleInline.gen.cpp.obj",
+			"BowlingScoreBoard.cpp.obj",
+			"BowlingScoreBoardCommands.cpp.obj",
+			"BowlingScoreBoardStyle.cpp.obj",
+			"ScoreBoardActor.cpp.obj",
+			"ScoreBoardWidget.cpp.obj"
+		]
+	}
+}
