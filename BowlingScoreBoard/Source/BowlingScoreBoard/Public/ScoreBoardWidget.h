@@ -43,18 +43,23 @@ public:
     int32 currentFrameScore;
     int32 remainingStrikeReps;
     int32 subFrameScore;
-    int32 totalScore;
 
     UEditableTextBox* CurrentTextBox;
 
 
     //Utility Functions
-    int32 CalculateTotal();
     bool isTextValid(const FText& NewText);
 
 
     UFUNCTION()
     void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType);
+
+    UFUNCTION()
+    void OnCloseButtonClicked();
+
+    UFUNCTION()
+    void OnResetButtonClicked();
+
 
 
     //Widget Connected Properties

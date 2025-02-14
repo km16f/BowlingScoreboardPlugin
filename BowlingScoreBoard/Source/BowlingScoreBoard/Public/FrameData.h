@@ -21,6 +21,7 @@ public:
 
 	bool isStrike;
 	bool isSpare;
+	bool activate3rdScore;
 
 	int32 remainingStrikeThrows;
 	int32 remainingSpareThrows;
