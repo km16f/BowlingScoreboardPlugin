@@ -1,0 +1,26 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\kylem\\documents\\unreal projects\\bowlingproject\\plugins\\bowlingscoreboard\\source\\bowlingscoreboard\\private\\bowlingscoreboardstyle.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\kylem\\documents\\unreal projects\\bowlingproject\\intermediate\\build\\win64\\x64\\bowlingprojecteditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\kylem\\documents\\unreal projects\\bowlingproject\\plugins\\bowlingscoreboard\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\bowlingscoreboard\\definitions.bowlingscoreboard.h",
+            "c:\\users\\kylem\\documents\\unreal projects\\bowlingproject\\plugins\\bowlingscoreboard\\source\\bowlingscoreboard\\public\\bowlingscoreboardstyle.h",
+            "c:\\users\\kylem\\documents\\unreal projects\\bowlingproject\\plugins\\bowlingscoreboard\\source\\bowlingscoreboard\\public\\bowlingscoreboard.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\slatecore\\public\\styling\\slatestyleregistry.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\engine\\public\\slate\\slategameresources.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\interfaces\\ipluginmanager.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\plugindescriptor.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\custombuildsteps.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\localizationdescriptor.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\moduledescriptor.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\plugindisalloweddescriptor.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\pluginreferencedescriptor.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\projects\\public\\versescope.h",
+            "c:\\program files\\epic games\\ue_5.5\\engine\\source\\runtime\\slatecore\\public\\styling\\slatestylemacros.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
