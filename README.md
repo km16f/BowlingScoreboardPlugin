@@ -1,7 +1,7 @@
 # BowlingScoreboardPlugin
 Bowling Scoreboard Exercise in Unreal Engine 5
 
-Description:
+**Description:**
 
 This is a C++ plugin for Unreal Engine 5 aimed at simulating a bowling scoreboard.
 
