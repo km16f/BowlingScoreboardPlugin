@@ -48,3 +48,4 @@ inputs are valid.
   - Cursor does not automatically move to next box (Unreal UI is being wonky here)
   - If you click out of the socreboard into the level you can press SHIFT + F1 to get back to the board
   - Final block sometimes doesn't add to total score
+  - Documentation dissapeared? Its late on valentines day I'll fix this tomorrow
