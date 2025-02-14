@@ -12,18 +12,27 @@ Includes C++ code needed to properly implement the scoring features
 INSTALL INFO:
 
 Engine Version: 5.5
+
 Clone Repository to a safe locaiton
+
 Create new black project in Unreal 5.5
+
 Open Unreal Project
+
 Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Folder
+
 Open Unreal Project
 
 TO RUN SCOREBOARD:
 
 Click "Window" Toolbar Menu in Unreal
+
 Click the "BowlingScoreBoard" button at the very bottom
+
 This should spawn an actor and start the bowling scoreboard GUI
+
 From here you enter any number 0-9, "X", "x", or "/" in each box and hit enter
+
 The board will unlock the next boxes and calculate the running score if your 
 inputs are valid.
 
