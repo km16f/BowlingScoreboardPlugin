@@ -20,11 +20,15 @@ Engine Version: 5.5
 
 Clone Repository to a safe locaiton
 
-Create new black project in Unreal 5.5
+Create new blank project in Unreal 5.5
 
 Open Unreal Project
 
-Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Folder
+Close Unreal Project
+
+Copy "BowlingScoreBoard" Folder to "Plugins" Folder in Unreal Engine Project Folder. (EX:C:\Users\{user{}\Documents\Unreal Projects\BowlingProject\Plugins) 
+
+You might have to create the project "Plugins" folder
 
 Open Unreal Project
 
