@@ -4,6 +4,8 @@
 #include "ScoreBoardWidget.h"
 #include "Components/EditableTextBox.h"
 #include "Components/GridSlot.h"
+#include "Kismet/GameplayStatics.h"
+#include "ScoreBoardActor.h"
 #include "WidgetBlueprint.h"
 
 UScoreBoardWidget::UScoreBoardWidget(const FObjectInitializer& ObjectInitializer)
@@ -22,9 +24,8 @@ void UScoreBoardWidget::NativeConstruct()
     activeStrike = false;
     activeSpare = false;
 
-    
-
-    UE_LOG(LogTemp, Log, TEXT("CONSTRUCT"));
+    CloseButton->OnClicked.AddDynamic(this, &UScoreBoardWidget::OnCloseButtonClicked);
+    ResetButton->OnClicked.AddDynamic(this, &UScoreBoardWidget::OnResetButtonClicked);
     
     if (!GridPanel)
     {
@@ -43,11 +44,6 @@ void UScoreBoardWidget::SetupWidget()
     {
         UFrameData* NewFrame = NewObject<UFrameData>(this);
         FrameList.Add(NewFrame);
-    }
-    for (UFrameData* Temp : FrameList)
-    {
-        UE_LOG(LogTemp, Log, TEXT("Iteration NUM: %d"), test);
-        test++;
     }
     ParseChildren(GridPanel);
 };
@@ -79,15 +75,11 @@ void UScoreBoardWidget::ParseChildren(UPanelWidget* TopWidget, int32 column, int
             {
 
                 UEditableTextBox* CurrentIterationBox = Cast<UEditableTextBox>(Child);
-                UE_LOG(LogTemp, Log, TEXT("COL: %d"), currentColumn);
-                UE_LOG(LogTemp, Log, TEXT("Row: %d"), currentRow);
-                UE_LOG(LogTemp, Log, TEXT("CURRENT SUB FRAME: %d"), currentSubFrame);
 
                 HandleTextBox(CurrentIterationBox, currentColumn, currentRow);
 
                 if (currentColumn == 0 && currentRow == 1 && currentSubFrame == 1)
                 {
-                    UE_LOG(LogTemp, Log, TEXT("WHY IT NO WORK"));
                     CurrentTextBox = CurrentIterationBox;
                     currentSubFrame++;
                 }
@@ -209,8 +201,6 @@ void UScoreBoardWidget::OnTextChanged(const FText& NewText, ETextCommit::Type Co
             }
             else
             {
-                UE_LOG(LogTemp, Log, TEXT("CURRENT FRAME: %d"), currentFrameNum);
-                UE_LOG(LogTemp, Log, TEXT("Sub block: %d"), currentSubFrame);
                 currentFrame->FrameNum = currentFrameNum;
                 
                 subFrameScore = currentVal - '0';  
@@ -232,16 +222,6 @@ void UScoreBoardWidget::OnTextChanged(const FText& NewText, ETextCommit::Type Co
     }
 }
 
-int32 UScoreBoardWidget::CalculateTotal()
-{
-    //int32 runningTotal;
-
-
-    totalScore = subFrameScore + totalScore;
-
-    return totalScore;
-}
-
 void UScoreBoardWidget::UpdateWidget()
 {
     int32 newFrame;
@@ -261,10 +241,10 @@ void UScoreBoardWidget::UpdateWidget()
     }
     else
     {
-        if (currentFrameNum == 10 && CurrentFrameData->activate3rdScore)
+        if (currentFrameNum == 10)
         {
             newFrame = currentFrameNum;
-            if (currentSubFrame == 2) { currentSubFrame++;}
+            if (currentSubFrame == 2 && CurrentFrameData->activate3rdScore) { currentSubFrame++;}
         }
         else
         {
@@ -289,7 +269,6 @@ void UScoreBoardWidget::UpdateWidget()
     }
     else
     {
-        UE_LOG(LogTemp, Log, TEXT("UNLOCKING 3"));
         CurrentTextBox = CurrentFrameData->Score3;
     }
   
@@ -338,14 +317,9 @@ void UScoreBoardWidget::HandleStrike()
 
         if (LastFrame->remainingStrikeThrows > 0)
         {
-            UE_LOG(LogTemp, Log, TEXT("FRAME TOTAL Before: %d"), LastFrame->FrameTotalScore);
             LastFrame->FrameTotalScore = LastFrame->FrameTotalScore + subFrameScore;
             LastFrame->remainingStrikeThrows--;
-            LastFrame->UpdateWidgets();
-            UE_LOG(LogTemp, Log, TEXT("THROWS LEFT: %d"), LastFrame->remainingStrikeThrows);
-            UE_LOG(LogTemp, Log, TEXT("SUB FRAME SCORE: %d"), subFrameScore);
-            UE_LOG(LogTemp, Log, TEXT("FRAME TOTAL AFTER: %d"), LastFrame->FrameTotalScore);
-            
+            LastFrame->UpdateWidgets();   
         }
 
         if (TwoFramesBehind->remainingStrikeThrows == 0 && LastFrame->remainingStrikeThrows == 0)
@@ -412,5 +386,64 @@ void UScoreBoardWidget::ShowWidget()
 
 void UScoreBoardWidget::CloseWidget()
 {
-    SetVisibility(ESlateVisibility::Hidden);
+    FWorldContext* worldContext;
+    UWorld* currentWorld;
+    TArray<AActor*> ScoreBoardActors;
+
+    worldContext = GEngine->GetWorldContextFromGameViewport(GEngine->GameViewport);
+
+    currentWorld = worldContext->World();
+    UE_LOG(LogTemp, Log, TEXT("CLOSE"))
+    GEditor->RequestEndPlayMap();
+    
+    UGameplayStatics::GetAllActorsOfClass(currentWorld, AScoreBoardActor::StaticClass(), ScoreBoardActors);
+
+    for (AActor* currentActor : ScoreBoardActors)
+    {
+        if (currentActor) { currentActor->Destroy();}
+    }
+}
+
+void UScoreBoardWidget::ResetWidget()
+{
+    UE_LOG(LogTemp, Log, TEXT("RESET"));
+
+    for (UFrameData* currentData : FrameList)
+    {
+        
+        currentData->Score1->SetText(FText::FromString(""));
+        if (currentData->FrameNum != 1) {currentData->Score1->SetIsReadOnly(true);}
+        
+        
+        currentData->Score2->SetText(FText::FromString(""));
+        currentData->Score2->SetIsReadOnly(true);
+
+        currentData->FrameTotalScoreWidget->SetText(FText::FromString(""));
+
+        if (currentData->Score3)
+        {
+            currentData->Score3->SetText(FText::FromString(""));
+            currentData->Score2->SetIsReadOnly(true);
+        }
+    }
+    currentFrameNum = 1;
+    currentFrameScore = 0;
+    currentSubFrame = 1;
+
+    activeStrike = false;
+    activeSpare = false;
+
+
+    remainingStrikeReps = 0;
+    subFrameScore = 0;
+}
+
+void UScoreBoardWidget::OnCloseButtonClicked()
+{
+    CloseWidget();
+}
+
+void UScoreBoardWidget::OnResetButtonClicked()
+{
+    ResetWidget();
 }
