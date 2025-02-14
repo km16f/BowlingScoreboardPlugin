@@ -11,7 +11,7 @@ AScoreBoardActor::AScoreBoardActor()
 
 }
 
-// Called when the game starts or when spawned
+// Called when the game starts or when spawned. Brings ScoreBoard Widget to the viewport
 void AScoreBoardActor::BeginPlay()
 {
 	Super::BeginPlay();

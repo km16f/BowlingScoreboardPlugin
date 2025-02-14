@@ -7,6 +7,11 @@
 #include "Blueprint/UserWidget.h"
 #include "ScoreBoardActor.generated.h"
 
+/*
+	Custom actor class to be spawned in the scene to activate our WidgetBlueprint
+
+*/
+
 UCLASS()
 class BOWLINGSCOREBOARD_API AScoreBoardActor : public AActor
 {

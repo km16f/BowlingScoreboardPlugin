@@ -10,6 +10,13 @@
 #include "FrameData.h"
 #include "ScoreBoardWidget.generated.h"
 
+/*
+    Main Widget class for our ScoreBoard Widget as a whole
+
+    Contains all the neccessary functions and properties for managing GUI elements and implementing the scoreboard features
+
+*/
+
 UCLASS()
 class BOWLINGSCOREBOARD_API UScoreBoardWidget : public UUserWidget
 {
@@ -21,7 +28,7 @@ public:
 
     virtual void NativeConstruct() override;
 
-    //GUI and DATA Setup
+    //GUI management and Data tracking
     void HandleStrike();
     void HandleSpare();
     void HandleTextBox(UEditableTextBox* currentTextBox, int32 currentColumn, int32 currentRow);
@@ -51,6 +58,7 @@ public:
     bool isTextValid(const FText& NewText);
 
 
+    //Event handling functions
     UFUNCTION()
     void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType);
 
@@ -62,7 +70,7 @@ public:
 
 
 
-    //Widget Connected Properties
+    //Properties connected to the WidgetBlueprint
     UPROPERTY(meta = (BindWidget))
     UGridPanel* GridPanel;
     
@@ -75,6 +83,7 @@ public:
     UPROPERTY(meta= (BindWidget))
     UTextBlock* Warning;
 
+    //Main list of all Frame Objects
     TArray<UFrameData*> FrameList;
 
 };
