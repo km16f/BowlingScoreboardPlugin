@@ -135,14 +135,13 @@ void UScoreBoardWidget::HandleTextBox(UEditableTextBox* IteratedTextBox, int32 c
             currentSubFrame = 2;
             CurrentFrameData->Score2->OnTextCommitted.AddDynamic(this, &UScoreBoardWidget::OnTextChanged);
         }
-        else
+        else if (WidgetName.Contains(FString(TEXT("Third"))))
         {
-            if (currentColumn == 3)
-            {
-                CurrentFrameData->Score3 = IteratedTextBox;
-                currentSubFrame = 3;
-                CurrentFrameData->Score3->OnTextCommitted.AddDynamic(this, &UScoreBoardWidget::OnTextChanged);
-            }
+            
+            CurrentFrameData->Score3 = IteratedTextBox;
+            currentSubFrame = 3;
+            CurrentFrameData->Score3->OnTextCommitted.AddDynamic(this, &UScoreBoardWidget::OnTextChanged);
+        
         }
         break;
 
@@ -166,6 +165,7 @@ void UScoreBoardWidget::OnTextChanged(const FText& NewText, ETextCommit::Type Co
 
         if (isValidText)        
         {
+
             Warning->SetVisibility(ESlateVisibility::Hidden);
 
             currentVal = NewText.ToString()[0];
@@ -188,6 +188,8 @@ void UScoreBoardWidget::OnTextChanged(const FText& NewText, ETextCommit::Type Co
                 currentFrame->remainingStrikeThrows = 2;
                 currentFrame->isStrike = true;
 
+                if (currentFrameNum == 10) { currentFrame->activate3rdScore = true; }
+
                 activeStrike = true;
             }
             else if (currentVal == '/')
@@ -201,11 +203,14 @@ void UScoreBoardWidget::OnTextChanged(const FText& NewText, ETextCommit::Type Co
                 currentFrame->FrameNum = currentFrameNum;
                 currentFrame->remainingSpareThrows = 1;
 
+                if (currentFrameNum == 10) { currentFrame->activate3rdScore = true; }
+
                 activeSpare = true;
             }
             else
             {
                 UE_LOG(LogTemp, Log, TEXT("CURRENT FRAME: %d"), currentFrameNum);
+                UE_LOG(LogTemp, Log, TEXT("Sub block: %d"), currentSubFrame);
                 currentFrame->FrameNum = currentFrameNum;
                 
                 subFrameScore = currentVal - '0';  
@@ -215,7 +220,6 @@ void UScoreBoardWidget::OnTextChanged(const FText& NewText, ETextCommit::Type Co
             }
 
             HandleStrike();
-            HandleSpare();
             HandleSpare();
             currentFrame->UpdateWidgets();
             UpdateWidget();
@@ -257,15 +261,15 @@ void UScoreBoardWidget::UpdateWidget()
     }
     else
     {
-        currentSubFrame = (currentFrameNum == 10 && currentFrameScore == 10) ? 3 : 1;
-
-        if (currentFrameNum == 10 && currentFrameScore == 10)
+        if (currentFrameNum == 10 && CurrentFrameData->activate3rdScore)
         {
             newFrame = currentFrameNum;
+            if (currentSubFrame == 2) { currentSubFrame++;}
         }
         else
         {
             newFrame = currentFrameNum + 1;
+            currentSubFrame = 1;
             currentFrameScore = 0;
         }
 
@@ -285,12 +289,11 @@ void UScoreBoardWidget::UpdateWidget()
     }
     else
     {
+        UE_LOG(LogTemp, Log, TEXT("UNLOCKING 3"));
         CurrentTextBox = CurrentFrameData->Score3;
     }
   
     CurrentTextBox->SetIsReadOnly(false);;
-    bool test = FSlateApplication::Get().SetKeyboardFocus(CurrentTextBox->GetCachedWidget(), EFocusCause::SetDirectly);
-    CurrentTextBox->SetKeyboardFocus();
     currentFrameNum = newFrame;
 }
 
