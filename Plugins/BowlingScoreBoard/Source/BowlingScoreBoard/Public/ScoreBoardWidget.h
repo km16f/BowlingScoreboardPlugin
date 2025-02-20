@@ -10,6 +10,9 @@
 #include "FrameData.h"
 #include "ScoreBoardWidget.generated.h"
 
+/*
+    This class represents our custom scoreboard widget 
+*/
 UCLASS()
 class BOWLINGSCOREBOARD_API UScoreBoardWidget : public UUserWidget
 {
@@ -51,6 +54,7 @@ public:
     bool isTextValid(const FText& NewText);
 
 
+    //Event handlers
     UFUNCTION()
     void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType);
 
