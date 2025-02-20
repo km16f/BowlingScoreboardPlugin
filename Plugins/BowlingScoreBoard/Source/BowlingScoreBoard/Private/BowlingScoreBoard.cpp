@@ -48,6 +48,7 @@ void FBowlingScoreBoardModule::ShutdownModule()
 	FBowlingScoreBoardCommands::Unregister();
 }
 
+//Called when the plugin button in the "Window" toolbar menu is clicked
 void FBowlingScoreBoardModule::PluginButtonClicked()
 {
 	SetupActor();
@@ -55,6 +56,7 @@ void FBowlingScoreBoardModule::PluginButtonClicked()
 
 }
 
+//Function to mirror pressing play in the scene to start the widget
 void FBowlingScoreBoardModule::PlayScene() 
 {
 	if (GEditor)
@@ -64,6 +66,7 @@ void FBowlingScoreBoardModule::PlayScene()
 	}
 }
 
+//Function to spawn our custom actor and popup our scoreboard widget
 void FBowlingScoreBoardModule::SetupActor()
 {
 	AScoreBoardActor* newActor;
@@ -76,22 +79,22 @@ void FBowlingScoreBoardModule::SetupActor()
 	UClass* ScriptActorClass;
 	UClass* ScoreBoardWidgetClass;
 
-	ScriptActorClass = LoadClass<AScoreBoardActor>(nullptr, TEXT("/Script/CoreUObject.Class'/Script/BowlingScoreBoard.ScoreBoardActor'"));
+	ScriptActorClass = LoadClass<AScoreBoardActor>(nullptr, TEXT("/Script/CoreUObject.Class'/Script/BowlingScoreBoard.ScoreBoardActor'"));										//Load custom Actor class
 
 	if (ScriptActorClass)
 	{
-		worldContext = GEngine->GetWorldContextFromGameViewport(GEngine->GameViewport);
+		worldContext = GEngine->GetWorldContextFromGameViewport(GEngine->GameViewport);																						//Reliable way to get the current world object for spawning
 
 		currentWorld = worldContext->World();
 		if (currentWorld)
 		{
-			newActor = currentWorld->SpawnActor<AScoreBoardActor>(ScriptActorClass, tempTransform, tempParameters);
+			newActor = currentWorld->SpawnActor<AScoreBoardActor>(ScriptActorClass, tempTransform, tempParameters);															//Spawn our actor
 
-			ScoreBoardWidgetClass = LoadClass<UUserWidget>(nullptr, TEXT("/Script/UMGEditor.WidgetBlueprint'/BowlingScoreBoard/BP_ScoreBoardWidget.BP_ScoreBoardWidget_C'"));
+			ScoreBoardWidgetClass = LoadClass<UUserWidget>(nullptr, TEXT("/Script/UMGEditor.WidgetBlueprint'/BowlingScoreBoard/BP_ScoreBoardWidget.BP_ScoreBoardWidget_C'"));			//Load our custom widget blueprint class
 
 			if (ScoreBoardWidgetClass)
 			{
-				UUserWidget* test = CreateWidget<UUserWidget>(currentWorld, ScoreBoardWidgetClass);
+				UUserWidget* test = CreateWidget<UUserWidget>(currentWorld, ScoreBoardWidgetClass);																		//Set the ref property in the actor to our widget blueprint
 				newActor->ScoreBoardWidgetRef = test;
 			}
 			else

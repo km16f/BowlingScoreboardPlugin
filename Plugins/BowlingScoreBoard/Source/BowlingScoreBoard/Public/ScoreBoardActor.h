@@ -24,6 +24,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//Variable used to attach widget to our actor and spawn it
 	UPROPERTY(EditAnywhere)
 	UUserWidget* ScoreBoardWidgetRef;
 
